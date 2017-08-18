@@ -1,0 +1,33 @@
+[server]
+URIScheme = "http"
+DocHostName = "localhost"
+DocPort = 30000
+HostName = "localhost"
+PortNum = 30000
+
+[cors]
+alloworigins = [
+    "*"
+]
+
+allowmethods = [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE"
+]
+
+[writedb]
+Database = "beerbox"
+Server = "192.168.10.10"
+Port = "3306"
+User = "beerbox"
+Pass = "beerbox"
+
+[readdb]
+Database = "beerbox"
+Server = "192.168.10.10"
+Port = "3306"
+User = "beerbox"
+Pass = "beerbox"

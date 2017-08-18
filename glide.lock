@@ -1,0 +1,42 @@
+hash: 0bc8713e75111a48612b1ea17103070bda13e70bcb28cad36403e9ccf02f5909
+updated: 2017-08-18T11:21:16.4070435+09:00
+imports:
+- name: github.com/BurntSushi/toml
+  version: b26d9c308763d68093482582cea63d69be07a0f0
+- name: github.com/deadcheat/go-retryablehttp
+  version: e3424b1adce97bb574eebb1398b5e0b7b45dfdbf
+- name: github.com/deadcheat/goacors
+  version: 0000b0d6fa546d549886da15ef182437222add59
+- name: github.com/deadcheat/uuider
+  version: 34aa5c5ccfbd30ec55a7cf40c0614c9edcae0c1a
+- name: github.com/go-sql-driver/mysql
+  version: a0583e0143b1624142adab07e0e97fe106d99561
+- name: github.com/goadesign/goa
+  version: 5783d01947e480ac09ce315f1ccba09835b8c865
+- name: github.com/jteeuwen/go-bindata
+  version: a0ff2567cfb70903282db057e799fd826784d41d
+- name: github.com/mattetti/filebuffer
+  version: 80f2c1c4dcf558a0cee1e4303225d17c6238e00a
+- name: github.com/satori/go.uuid
+  version: 879c5887cd475cd7864858769793b2ceb0d44feb
+- name: github.com/spf13/viper
+  version: a1ecfa6a20bd4ef9e9caded262ee1b1b26847675
+- name: github.com/streadway/amqp
+  version: 63795daa9a446c920826655f26ba31c81c860fd6
+- name: github.com/uber-go/zap
+  version: 300d56ffb8cc64ae052901970de2220411d201f7
+- name: gopkg.in/DATA-DOG/go-sqlmock.v1
+  version: b983233bc0bbea4dc6e8ec8c8c923d935765ffec
+- name: gopkg.in/urfave/cli.v1
+  version: 0bdeddeeb0f650497d603c4ad7b20cfe685682f6
+- name: upper.io/db.v3
+  version: d3a9083db875170b64a13016fa829ae507103161
+  subpackages:
+  - mysql
+testImports:
+- name: github.com/deadcheat/toprope
+  version: 57a34e2069974c207ea309d10af4494e4bd5956d
+- name: github.com/golang/mock
+  version: bd3c8e81be01eef76d4b503f5e687d2d1354d2d9
+  subpackages:
+  - gomock
