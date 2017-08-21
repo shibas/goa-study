@@ -2,10 +2,10 @@ package controllers
 
 import (
 	"context"
+	"goa-study/swaggerassets"
 	"net/http"
 	"path/filepath"
 	"strings"
-	"yabumi/swaggerassets"
 
 	"github.com/goadesign/goa"
 	"github.com/mattetti/filebuffer"

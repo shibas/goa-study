@@ -5,6 +5,7 @@ package main
 import (
 	"compress/gzip"
 	"flag"
+	"goa-study/app"
 	"goa-study/controllers"
 	"goa-study/env"
 
@@ -30,7 +31,13 @@ func main() {
 	service.Use(middleware.Recover())
 	service.Use(gm.Middleware(gzip.BestSpeed))
 
-	// Mount uid_sending_message controller
+	// Mount beer controller
+	b := controllers.NewBeerController(service)
+	app.MountBeerController(service, b)
+
+	// Mount tap controller
+	t := controllers.NewTapController(service)
+	app.MountTapController(service, t)
 
 	// Only On DevelopmentMode
 	if env.OnDevelopment {
