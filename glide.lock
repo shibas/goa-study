@@ -1,37 +1,100 @@
-hash: 0bc8713e75111a48612b1ea17103070bda13e70bcb28cad36403e9ccf02f5909
-updated: 2017-08-18T11:21:16.4070435+09:00
+hash: b313287f7bfe7bad71487cd9874884c8172a498d61fa3ec276eac0dc6a5a83ef
+updated: 2017-08-21T11:26:24.7592841+09:00
 imports:
+- name: github.com/armon/go-metrics
+  version: f036747b9d0e8590f175a5d654a2194a7d9df4b5
 - name: github.com/BurntSushi/toml
   version: b26d9c308763d68093482582cea63d69be07a0f0
-- name: github.com/deadcheat/go-retryablehttp
-  version: e3424b1adce97bb574eebb1398b5e0b7b45dfdbf
 - name: github.com/deadcheat/goacors
   version: 0000b0d6fa546d549886da15ef182437222add59
-- name: github.com/deadcheat/uuider
-  version: 34aa5c5ccfbd30ec55a7cf40c0614c9edcae0c1a
+- name: github.com/dimfeld/httppath
+  version: c8e499c3ef3c3e272ed8bdcc1ccf39f73c88debc
+- name: github.com/dimfeld/httptreemux
+  version: 13dde8a00d96b369e7398490fd8a3af9ca114b84
+- name: github.com/fsnotify/fsnotify
+  version: 4da3e2cfbabc9f751898f250b49f2439785783a1
 - name: github.com/go-sql-driver/mysql
   version: a0583e0143b1624142adab07e0e97fe106d99561
 - name: github.com/goadesign/goa
   version: 5783d01947e480ac09ce315f1ccba09835b8c865
+  subpackages:
+  - design
+  - design/apidsl
+  - dslengine
+  - uuid
+- name: github.com/hashicorp/hcl
+  version: 392dba7d905ed5d04a5794ba89f558b27e2ba1ca
+  subpackages:
+  - hcl/ast
+  - hcl/parser
+  - hcl/scanner
+  - hcl/strconv
+  - hcl/token
+  - json/parser
+  - json/scanner
+  - json/token
 - name: github.com/jteeuwen/go-bindata
   version: a0ff2567cfb70903282db057e799fd826784d41d
+- name: github.com/magiconair/properties
+  version: 51463bfca2576e06c62a8504b5c0f06d61312647
+- name: github.com/manveru/faker
+  version: 717f7cf83fb78669bfab612749c2e8ff63d5be11
 - name: github.com/mattetti/filebuffer
   version: 80f2c1c4dcf558a0cee1e4303225d17c6238e00a
+- name: github.com/mitchellh/mapstructure
+  version: d0303fe809921458f417bcf828397a65db30a7e4
+- name: github.com/pelletier/go-buffruneio
+  version: c37440a7cf42ac63b919c752ca73a85067e05992
+- name: github.com/pelletier/go-toml
+  version: fe7536c3dee2596cdd23ee9976a17c22bdaae286
 - name: github.com/satori/go.uuid
   version: 879c5887cd475cd7864858769793b2ceb0d44feb
+- name: github.com/spf13/afero
+  version: 9be650865eab0c12963d8753212f4f9c66cdcf12
+  subpackages:
+  - mem
+- name: github.com/spf13/cast
+  version: acbeb36b902d72a7a4c18e8f3241075e7ab763e4
+- name: github.com/spf13/jwalterweatherman
+  version: 0efa5202c04663c757d84f90f5219c1250baf94f
+- name: github.com/spf13/pflag
+  version: e57e3eeb33f795204c1ca35f56c44f83227c6e66
 - name: github.com/spf13/viper
   version: a1ecfa6a20bd4ef9e9caded262ee1b1b26847675
 - name: github.com/streadway/amqp
   version: 63795daa9a446c920826655f26ba31c81c860fd6
 - name: github.com/uber-go/zap
   version: 300d56ffb8cc64ae052901970de2220411d201f7
+- name: github.com/zach-klippenstein/goregen
+  version: 795b5e3961ea1912fde60af417ad85e86acc0d6a
+- name: golang.org/x/net
+  version: 1a68b1313cf4ad7778376e82641197b60c02f65c
+  subpackages:
+  - context
+- name: golang.org/x/sys
+  version: 0b25a408a50076fbbcae6b7ac0ea5fbb0b085e79
+  subpackages:
+  - unix
+- name: golang.org/x/text
+  version: 210eee5cf7323015d097341bcf7166130d001cd8
+  subpackages:
+  - transform
+  - unicode/norm
 - name: gopkg.in/DATA-DOG/go-sqlmock.v1
   version: b983233bc0bbea4dc6e8ec8c8c923d935765ffec
-- name: gopkg.in/urfave/cli.v1
-  version: 0bdeddeeb0f650497d603c4ad7b20cfe685682f6
+- name: gopkg.in/yaml.v2
+  version: cd8b52f8269e0feb286dfeef29f8fe4d5b397e0b
 - name: upper.io/db.v3
-  version: d3a9083db875170b64a13016fa829ae507103161
+  version: 46f50a98f8d5d77d1d4631f1bcc0ce6496e55734
   subpackages:
+  - internal/cache
+  - internal/cache/hashstructure
+  - internal/immutable
+  - internal/sqladapter
+  - internal/sqladapter/compat
+  - internal/sqladapter/exql
+  - lib/reflectx
+  - lib/sqlbuilder
   - mysql
 testImports:
 - name: github.com/deadcheat/toprope

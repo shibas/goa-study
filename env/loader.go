@@ -5,16 +5,15 @@ package env
 import (
 	"bytes"
 	"fmt"
-	"log"
-	"time"
 	"goa-study/assets"
 	"goa-study/valueobjects/config"
+	"log"
+	"time"
 
 	"upper.io/db.v3/lib/sqlbuilder"
 
 	"github.com/deadcheat/goacors"
 	"github.com/spf13/viper"
-	"github.com/streadway/amqp"
 )
 
 // 環境設定として保持する情報の構造体
@@ -29,17 +28,12 @@ var (
 	Server           *config.ServerConfig
 	HTTPClientConfig *config.HTTPClientConfig
 	CorsConf         goacors.GoaCORSConfig
-	Externals        *config.ExternalsConfig
 
 	// DB
 	writeDB            *config.DatabaseEnv
 	readDB             *config.DatabaseEnv
 	Connection         sqlbuilder.Database
 	ReadOnlyConnection sqlbuilder.Database
-
-	// RabbitMQ
-	amqpEnv        *config.AMQPEnv
-	AMQPConnection *amqp.Connection
 )
 
 // init パッケージの初期化処理
@@ -77,8 +71,6 @@ func InitializeEnv() {
 	_ = viper.UnmarshalKey("cors", &CorsConf)
 	_ = viper.UnmarshalKey("writedb", &writeDB)
 	_ = viper.UnmarshalKey("readdb", &readDB)
-	_ = viper.UnmarshalKey("externals", &Externals)
-	_ = viper.UnmarshalKey("amqpEnv", &amqpEnv)
 
 	if HTTPClientConfig == nil {
 		HTTPClientConfig = &config.HTTPClientConfig{
@@ -99,12 +91,5 @@ func IgniteDBConnection() {
 	if readDB != nil {
 		ReadOnlyConnection = readDB.Conn()
 		ReadOnlyConnection.SetLogging(OnDevelopment)
-	}
-}
-
-// IgniteAMQPConnection RabbitMQコネクションをスタートする
-func IgniteAMQPConnection() {
-	if amqpEnv != nil {
-		AMQPConnection = amqpEnv.Conn()
 	}
 }
