@@ -129,7 +129,7 @@ var TapMedia = MediaType("application/vnd.goa.study.tap+json", func() {
 	Description("A beer info of tap")
 	Attributes(func() {
 		Attribute("id", Integer, "beer tap ID")
-		Attribute("beerID", String, "beer name")
+		Attribute("beerID", Integer, "beer name")
 		Attribute("beerTitle", String, "beer name")
 		Attribute("created_at", String, "create time stamp")
 		Attribute("updated_at", String, "update time stamp")
@@ -152,4 +152,5 @@ var BeerPayload = Type("BeerPayload", func() {
 
 var TapPayload = Type("TypePayload", func() {
 	Member("beerID", Integer, "beer ID related tap")
+	Required("beerID")
 })
