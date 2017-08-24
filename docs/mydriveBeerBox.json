@@ -1,0 +1,1725 @@
+{
+  "front-version": "2.8.0.1",
+  "version": 3,
+  "nodes": [
+    {
+      "type": "Project",
+      "id": "95fe6ff5-2797-41e3-9470-34b46aa9ea36",
+      "lastModified": "2017-08-24T18:50:11.391+09:00",
+      "name": "BeerTaps"
+    },
+    {
+      "type": "Service",
+      "description": "データベースに新規データを追加・削除するテスト群",
+      "id": "14d5e912-c7fd-43fd-b10f-a19471673081",
+      "lastModified": "2017-08-24T11:19:29.301+09:00",
+      "name": "ChangeDataAPITest",
+      "parentId": "95fe6ff5-2797-41e3-9470-34b46aa9ea36"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"title\": \"${timestamp().base64().substring(0, 10)}\",\n  \"type\": \"${\"beerType\"}\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/beers"
+      },
+      "id": "90a1e811-6a35-4031-bbf0-96871c8fd857",
+      "lastModified": "2017-08-23T12:55:23.767+09:00",
+      "name": "CreateNewBeer",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[type]",
+          "value": "${\"beerType\"}"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "14d5e912-c7fd-43fd-b10f-a19471673081"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"beerID\": ${\"newBeerID\"}\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/taps"
+      },
+      "id": "5e29f595-de93-4fcd-a217-20d0e1f40ed5",
+      "lastModified": "2017-08-23T12:59:52.918+09:00",
+      "name": "CreateNewTap",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[beerID]",
+          "value": "${\"newBeerID\"}"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "14d5e912-c7fd-43fd-b10f-a19471673081"
+    },
+    {
+      "type": "Service",
+      "description": "",
+      "id": "e587a16f-c9f6-4c3a-8669-51488a8a7d07",
+      "lastModified": "2017-08-21T19:21:25.819+09:00",
+      "name": "WorkInProgress",
+      "parentId": "95fe6ff5-2797-41e3-9470-34b46aa9ea36"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc5789",
+        "name": "PATCH"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"title\": \"${uuid().md5()}\",\n  \"type\": \"${\"beerType\"}\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/beers/1"
+      },
+      "id": "3c8ce9e1-edaf-461b-bbd4-111cede29b3a",
+      "lastModified": "2017-08-21T20:54:31.626+09:00",
+      "name": "ChangeExistBeerInfo",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userID]",
+          "value": "\"0\""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userType]",
+          "value": "system"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[type]",
+          "value": "aut"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "e587a16f-c9f6-4c3a-8669-51488a8a7d07"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc5789",
+        "name": "PATCH"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"beerID\": ${\"newBeerID\"}\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/taps/1"
+      },
+      "id": "fed8a757-a4d1-435c-b048-ae520e979cd6",
+      "lastModified": "2017-08-22T15:33:12.734+09:00",
+      "name": "ChangeExistTapInfo",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userID]",
+          "value": "\"0\""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userType]",
+          "value": "system"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[type]",
+          "value": "aut"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "e587a16f-c9f6-4c3a-8669-51488a8a7d07"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"title\": \"${uuid().md5()}\",\n  \"type\": \"${\"beerType\"}\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/beers"
+      },
+      "id": "b9032e42-e71a-40a1-8ea2-5e0dff71b561",
+      "lastModified": "2017-08-21T19:54:15.500+09:00",
+      "name": "CreateNewBeer",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userID]",
+          "value": "\"0\""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userType]",
+          "value": "system"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[type]",
+          "value": "aut"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "e587a16f-c9f6-4c3a-8669-51488a8a7d07"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"title\": \"${uuid().md5()}\",\n  \"type\": \"${\"beerType\"}\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/taps"
+      },
+      "id": "e85274f8-6998-423b-b048-1bc90bed8834",
+      "lastModified": "2017-08-22T14:55:31.820+09:00",
+      "name": "CreateNewTap",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userID]",
+          "value": "\"0\""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userType]",
+          "value": "system"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[type]",
+          "value": "aut"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "e587a16f-c9f6-4c3a-8669-51488a8a7d07"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"title\": \"${uuid().md5()}\",\n  \"type\": \"${\"beerType\"}\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/beers"
+      },
+      "id": "83c0e29e-5945-4365-beab-c65ee08d97b4",
+      "lastModified": "2017-08-21T20:44:25.910+09:00",
+      "name": "DeleteBeerInfo",
+      "headers": [],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userID]",
+          "value": "\"0\""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userType]",
+          "value": "system"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[type]",
+          "value": "aut"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "e587a16f-c9f6-4c3a-8669-51488a8a7d07"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"title\": \"${uuid().md5()}\",\n  \"type\": \"${\"beerType\"}\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/beers"
+      },
+      "id": "e3d9d0ab-0bc5-474a-bc71-36328a45e551",
+      "lastModified": "2017-08-22T15:38:47.242+09:00",
+      "name": "DeleteTapInfo",
+      "headers": [],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userID]",
+          "value": "\"0\""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userType]",
+          "value": "system"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[type]",
+          "value": "aut"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "e587a16f-c9f6-4c3a-8669-51488a8a7d07"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"title\": \"${uuid().md5()}\",\n  \"type\": \"${\"beerType\"}\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/beers"
+      },
+      "id": "236c706d-c639-4c63-aaef-c964b981e1c9",
+      "lastModified": "2017-08-21T20:15:55.979+09:00",
+      "name": "GetBeerByID",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userID]",
+          "value": "\"0\""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userType]",
+          "value": "system"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[type]",
+          "value": "aut"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "e587a16f-c9f6-4c3a-8669-51488a8a7d07"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"title\": \"${uuid().md5()}\",\n  \"type\": \"${\"beerType\"}\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/beers/100"
+      },
+      "id": "322c9557-4e96-4552-8d9f-3ef566ff52fa",
+      "lastModified": "2017-08-21T20:35:15.085+09:00",
+      "name": "GetBeerList",
+      "headers": [],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userID]",
+          "value": "\"0\""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userType]",
+          "value": "system"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[type]",
+          "value": "aut"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "e587a16f-c9f6-4c3a-8669-51488a8a7d07"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"beerID\": 5\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/taps"
+      },
+      "id": "67c63f1f-1117-4562-b743-942c7d1c3bec",
+      "lastModified": "2017-08-22T15:15:33.818+09:00",
+      "name": "GetTapByID",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userID]",
+          "value": "\"0\""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userType]",
+          "value": "system"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[type]",
+          "value": "aut"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "e587a16f-c9f6-4c3a-8669-51488a8a7d07"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"beerID\": 5\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/taps"
+      },
+      "id": "fbc78991-38c8-4abf-9f4c-76dbb2d34bd1",
+      "lastModified": "2017-08-22T15:23:43.990+09:00",
+      "name": "GetTapList",
+      "headers": [],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userID]",
+          "value": "\"0\""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userType]",
+          "value": "system"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[type]",
+          "value": "aut"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "e587a16f-c9f6-4c3a-8669-51488a8a7d07"
+    },
+    {
+      "type": "Scenario",
+      "id": "9f99fbe8-a0ff-474d-9936-46b67d603f06",
+      "lastModified": "2017-08-24T18:49:06.352+09:00",
+      "name": "Scenario 1",
+      "requestOrder": [
+        "CreateNewBeer",
+        "CreateNewTap",
+        "DeleteTapInfo",
+        "DeleteBeerInfo",
+        "ChangeExistBeerInfo",
+        "ChangeExistTapInfo",
+        "GetBeerList",
+        "GetBeerByID",
+        "GetTapByID",
+        "GetTapList"
+      ],
+      "parentId": "95fe6ff5-2797-41e3-9470-34b46aa9ea36"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"title\": \"${\"beerNameOld\"}\",\n  \"type\": \"${\"beerTypeOld\"}\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/beers"
+      },
+      "id": "b49223bb-f0d5-42f2-9369-79c795aa5bd3",
+      "lastModified": "2017-08-24T12:19:04.664+09:00",
+      "name": "CreateNewBeer",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "201"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[type]",
+          "value": "${\"beerTypeOld\"}"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "9f99fbe8-a0ff-474d-9936-46b67d603f06"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"beerID\": ${\"newBeerID\"}\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/taps"
+      },
+      "id": "f8846bb0-fdbd-423b-bce1-77ca5e7f091e",
+      "lastModified": "2017-08-24T11:45:32.889+09:00",
+      "name": "CreateNewTap",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[beerID]",
+          "value": "${\"newBeerID\"}"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "9f99fbe8-a0ff-474d-9936-46b67d603f06"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"title\": \"${uuid().md5()}\",\n  \"type\": \"${\"beerType\"}\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/taps/${\"removeTapID\"}"
+      },
+      "id": "ba74b501-74a9-460a-9217-8e2d33da14c0",
+      "lastModified": "2017-08-24T12:24:31.935+09:00",
+      "name": "DeleteTapInfo",
+      "headers": [],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "204"
+        },
+        {
+          "comparison": "DoesNotExist",
+          "subject": "ResponseBody",
+          "path": "content",
+          "value": "aut"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "9f99fbe8-a0ff-474d-9936-46b67d603f06"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"title\": \"${uuid().md5()}\",\n  \"type\": \"${\"beerType\"}\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/beers/${\"removeBeerID\"}"
+      },
+      "id": "2cc3c9dd-6e36-4338-9e9e-75ea35a85543",
+      "lastModified": "2017-08-24T12:24:11.696+09:00",
+      "name": "DeleteBeerInfo",
+      "headers": [],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "204"
+        },
+        {
+          "comparison": "DoesNotExist",
+          "subject": "ResponseBody",
+          "path": "content",
+          "value": "aut"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "9f99fbe8-a0ff-474d-9936-46b67d603f06"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc5789",
+        "name": "PATCH"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"title\": \"${\"beerNameOld\"}\",\n  \"type\": \"${\"beerTypeOld\"}\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/beers/1"
+      },
+      "id": "7a85b84e-1ac7-47cc-99ee-52029560fd4d",
+      "lastModified": "2017-08-24T18:50:11.392+09:00",
+      "name": "ChangeExistBeerInfo",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userID]",
+          "value": "\"0\""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userType]",
+          "value": "system"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[type]",
+          "value": "aut"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "9f99fbe8-a0ff-474d-9936-46b67d603f06"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc5789",
+        "name": "PATCH"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"beerID\": ${\"newBeerID\"}\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/taps/1"
+      },
+      "id": "7b8e32a7-abd3-4ed6-8f63-630cf9fefabd",
+      "lastModified": "2017-08-24T18:48:31.851+09:00",
+      "name": "ChangeExistTapInfo",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userID]",
+          "value": "\"0\""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userType]",
+          "value": "system"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[type]",
+          "value": "aut"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "9f99fbe8-a0ff-474d-9936-46b67d603f06"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"title\": \"${uuid().md5()}\",\n  \"type\": \"${\"beerType\"}\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/beers/100"
+      },
+      "id": "fc95a8f8-c72d-4a92-ab53-d50a953ee5fe",
+      "lastModified": "2017-08-24T18:48:31.851+09:00",
+      "name": "GetBeerList",
+      "headers": [],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userID]",
+          "value": "\"0\""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userType]",
+          "value": "system"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[type]",
+          "value": "aut"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "9f99fbe8-a0ff-474d-9936-46b67d603f06"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"title\": \"${uuid().md5()}\",\n  \"type\": \"${\"beerType\"}\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/beers"
+      },
+      "id": "08b5a5e1-19ba-4304-89ef-1e5095d3059a",
+      "lastModified": "2017-08-24T18:48:31.851+09:00",
+      "name": "GetBeerByID",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userID]",
+          "value": "\"0\""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userType]",
+          "value": "system"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[type]",
+          "value": "aut"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "9f99fbe8-a0ff-474d-9936-46b67d603f06"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"beerID\": 5\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/taps"
+      },
+      "id": "8efdd54b-c14b-44c6-8414-a7649b53f27f",
+      "lastModified": "2017-08-24T18:48:31.851+09:00",
+      "name": "GetTapByID",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userID]",
+          "value": "\"0\""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userType]",
+          "value": "system"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[type]",
+          "value": "aut"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "9f99fbe8-a0ff-474d-9936-46b67d603f06"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": ""
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"beerID\": 5\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "${\"HOST\"}",
+        "path": "/api/taps"
+      },
+      "id": "6e18fbf1-7bc3-45dc-9763-66fc768ec3f8",
+      "lastModified": "2017-08-24T18:48:31.851+09:00",
+      "name": "GetTapList",
+      "headers": [],
+      "assertions": [
+        {
+          "comparison": "Equals",
+          "subject": "ResponseStatus",
+          "path": "code",
+          "value": "200"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userID]",
+          "value": "\"0\""
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[sender][userType]",
+          "value": "system"
+        },
+        {
+          "comparison": "Equals",
+          "subject": "ResponseJsonBody",
+          "path": "$[type]",
+          "value": "aut"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "facebook|593472274376637"
+      },
+      "parentId": "9f99fbe8-a0ff-474d-9936-46b67d603f06"
+    },
+    {
+      "type": "Context",
+      "id": "478436c7-2257-48ed-b2da-13b9a52c9f2c",
+      "lastModified": "2017-08-24T11:38:12.293+09:00",
+      "name": "beer_local",
+      "variables": [
+        {
+          "enabled": true,
+          "name": "HOST",
+          "value": "localhost:30000"
+        },
+        {
+          "enabled": true,
+          "name": "beerName",
+          "value": "Heineken"
+        },
+        {
+          "enabled": true,
+          "name": "beerType",
+          "value": "Lager"
+        },
+        {
+          "enabled": true,
+          "name": "beerID",
+          "value": "1"
+        },
+        {
+          "enabled": true,
+          "name": "tapID",
+          "value": "1"
+        },
+        {
+          "enabled": true,
+          "name": "newBeerID",
+          "value": "2"
+        },
+        {
+          "enabled": true,
+          "name": "beerTypeOld",
+          "value": "Weizen"
+        },
+        {
+          "enabled": true,
+          "name": "beerNameOld",
+          "value": "銀河高原ビール"
+        },
+        {
+          "enabled": true,
+          "name": "removeBeerID",
+          "value": "10"
+        },
+        {
+          "enabled": true,
+          "name": "removeTapID",
+          "value": "10"
+        }
+      ]
+    },
+    {
+      "type": "Context",
+      "id": "55D86463-0CB7-49D0-B853-B6E3D6F4C54A",
+      "lastModified": "2017-08-23T13:28:37.177+09:00",
+      "name": "develop",
+      "variables": [
+        {
+          "enabled": true,
+          "name": "playerContractID",
+          "value": "1135"
+        },
+        {
+          "enabled": true,
+          "name": "playerSpecialist",
+          "value": "specialist"
+        },
+        {
+          "enabled": true,
+          "name": "bid",
+          "value": "1"
+        },
+        {
+          "enabled": true,
+          "name": "myUserID",
+          "value": "10180"
+        },
+        {
+          "enabled": true,
+          "name": "threadUUID",
+          "value": "b4d2232b-584c-4f10-822a-1fa8693b6317"
+        },
+        {
+          "enabled": true,
+          "name": "HOST",
+          "value": "http://app-message-api.dev-golang.istyle.local"
+        }
+      ]
+    },
+    {
+      "type": "Context",
+      "id": "EDAD508D-7F4E-46E5-BB46-FD6A8DBA7FDF",
+      "lastModified": "2017-08-23T19:11:58.733+09:00",
+      "name": "local",
+      "variables": [
+        {
+          "enabled": true,
+          "name": "playerContractID",
+          "value": "1011"
+        },
+        {
+          "enabled": true,
+          "name": "playerSpecialist",
+          "value": "specialist"
+        },
+        {
+          "enabled": true,
+          "name": "bid",
+          "value": "1147"
+        },
+        {
+          "enabled": true,
+          "name": "myUserID",
+          "value": "101613037"
+        },
+        {
+          "enabled": true,
+          "name": "threadUUID",
+          "value": "6e0f9aea-7a63-4e89-bca1-60f13627d359"
+        },
+        {
+          "enabled": true,
+          "name": "HOST",
+          "value": "localhost:29900"
+        }
+      ]
+    }
+  ]
+}
